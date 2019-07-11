@@ -15,7 +15,7 @@ namespace SlugBusSchedule.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult BusDisplay()
         {
             return View();
         }
