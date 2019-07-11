@@ -7,6 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SlugBusSchedule.Models
 {
+    public class SlugContext : DbContext
+    {
+        public SlugContext(DbContextOptions<SlugContext> options)
+            : base(options)
+        { }
+
+        public DbSet<Schedule> Schedules { get; set; }
+    }
+
     public class Schedule
     {
         [Key]
@@ -27,14 +36,5 @@ namespace SlugBusSchedule.Models
         public DateTime Oakes { get; set; }
 
 
-    }
-
-    public class SlugContext : DbContext
-    {
-        public SlugContext(DbContextOptions<SlugContext> options)
-            : base(options)
-        { }
-
-        public DbSet<Schedule> Schedules { get; set; }
     }
 }
