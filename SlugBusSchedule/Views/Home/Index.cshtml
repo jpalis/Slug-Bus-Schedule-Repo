@@ -22,7 +22,46 @@
                 <p>Something about bus stops and the santa cruz metro</p>
                 <p>
                     <!--This button will direct users to the bus card page with the user location-->
-                    <a class="btn btn-primary" href="#" role="button">Find your bus</a>
+                    <a class="btn btn-primary" href="javascript:getLocation()" role="button">Find your bus</a>
+                    <script>
+                        var x = document.getElementsByClassName("btn btn-primary");
+                        function getLocation() {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(getPosition, showError);
+                            } else { 
+                                x.innerHTML = "Geolocation is not supported by this browser.";
+                            }
+                        }
+
+                        function getPosition(position) {
+                            var positionToSend = {latitude: "", longitude: ""};
+                            positionToSend.latitude = position.coords.latitude;
+                            positionToSend.longitude = position.coords.longitude;
+                            var dataToSend = JSON.stringify(positionToSend);
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "Home/Index");
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                            xhr.send(dataToSend);
+                        }
+
+                        function showError(error) {
+                            switch(error.code) {
+                                case error.PERMISSION_DENIED:
+                                    x.innerHTML = "User denied the request for Geolocation."
+                                break;
+                                case error.POSITION_UNAVAILABLE:
+                                    x.innerHTML = "Location information is unavailable."
+                                break;
+                                case error.TIMEOUT:
+                                    x.innerHTML = "The request to get user location timed out."
+                                break;
+                                case error.UNKNOWN_ERROR:
+                                    x.innerHTML = "An unknown error occurred."
+                                break;
+                            }
+}
+                    </script>
                 </p>
             </div>
         </div>
