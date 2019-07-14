@@ -1,3 +1,4 @@
+using System;
 /**Use to calculate GPS info to the nearest bus stops */
 
 public class Map
@@ -96,26 +97,179 @@ public class Map
              latSymbol="h";
         }
         //Decide longitude
-        if (lon < lon1)
+        switch (latSymbol)
         {
-            nearestBusStop = latSymbol + "1";
-        }else if (lon1 <= lon && lon < lon2)
-        {
-            nearestBusStop = latSymbol + "2";
-        }else if (lon2 <= lon && lon < lon3)  
-        {
-            nearestBusStop = latSymbol + "3";
-        }else if (lon3 <= lon && lon < lon4)
-        {
-            nearestBusStop = latSymbol + "4";
-        }else if (lon4 <= lon && lon < lon5)
-        {
-            nearestBusStop = latSymbol + "5";
-        }else
-        {
-            nearestBusStop = latSymbol + "6";
+            case "a":
+                if (lon < lon1)
+                {
+                    nearestBusStop = a1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = a2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = a3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = a4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = a5;
+                }else
+                {
+                    nearestBusStop = a6;
+                }
+                break;
+            case "b":
+                if (lon < lon1)
+                {
+                    nearestBusStop = b1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = b2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = b3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = b4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = b5;
+                }else
+                {
+                    nearestBusStop = b6;
+                }
+                break;
+            case "c":
+                if (lon < lon1)
+                {
+                    nearestBusStop = c1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = c2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = c3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = c4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = c5;
+                }else
+                {
+                    nearestBusStop = c6;
+                }
+                break;
+            case "d":
+                if (lon < lon1)
+                {
+                    nearestBusStop = d1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = d2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = d3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = d4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = d5;
+                }else
+                {
+                    nearestBusStop = d6;
+                }
+                break;
+            case "e":
+                if (lon < lon1)
+                {
+                    nearestBusStop = e1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = e2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = e3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = e4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = e5;
+                }else
+                {
+                    nearestBusStop = e6;
+                }
+                break;
+            case "f":
+                if (lon < lon1)
+                {
+                    nearestBusStop = f1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = f2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = f3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = f4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = f5;
+                }else
+                {
+                    nearestBusStop = f6;
+                }
+                break;
+            case "g":
+                if (lon < lon1)
+                {
+                    nearestBusStop = g1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = g2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = g3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = g4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = g5;
+                }else
+                {
+                    nearestBusStop = g6;
+                }
+                break;
+            case "h":
+                if (lon < lon1)
+                {
+                    nearestBusStop = h1;
+                }else if (lon1 <= lon && lon < lon2)
+                {
+                    nearestBusStop = h2;
+                }else if (lon2 <= lon && lon < lon3)  
+                {
+                    nearestBusStop = h3;
+                }else if (lon3 <= lon && lon < lon4)
+                {
+                    nearestBusStop = h4;
+                }else if (lon4 <= lon && lon < lon5)
+                {
+                    nearestBusStop = h5;
+                }else
+                {
+                    nearestBusStop = h6;
+                }
+                break;
         }
-
+            
+        Console.WriteLine("\n\n\n\n\n"+nearestBusStop+"\n\n\n\n\n");
         return nearestBusStop;
     }
 
