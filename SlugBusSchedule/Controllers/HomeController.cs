@@ -14,11 +14,11 @@ namespace SlugBusSchedule.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new IndexViewModel());
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Index(IndexViewModel model, [FromBody] Position position)
+        public IActionResult Index([FromBody] Position position)
         {
             //get string {latitude:"",longitude""} and parse into lat and lon values
             double lat = position.latitude;
