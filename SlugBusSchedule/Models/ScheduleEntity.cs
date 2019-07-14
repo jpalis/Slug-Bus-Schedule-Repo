@@ -9,6 +9,14 @@ namespace SlugBusSchedule.Models
 {
     public class SlugContext : DbContext
     {
+        public SlugContext(DbContextOptions<SlugContext> options)
+            : base(options)
+        { }
+        public SlugContext()
+        {
+
+        }
+
         public DbSet<Schedule> Schedules { get; set; }
     }
 

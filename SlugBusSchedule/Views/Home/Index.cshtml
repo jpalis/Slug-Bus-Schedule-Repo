@@ -1,7 +1,12 @@
-﻿@{
+﻿@model IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <input hidden name="LocationJson" id="userLocationForm" />
+}
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
