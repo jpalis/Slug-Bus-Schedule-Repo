@@ -7,8 +7,9 @@ namespace SlugBusSchedule.Models
 {
     public class BusDisplayViewModel
     {
-        public string UserLocation { get; set; }
         public string ClosestBusStop { get; set; }
+        public string UserLatitude { get; set; }
+        public string UserLongitude { get; set; }
         public List<Schedule> BusData { get; set; }
     }
 }

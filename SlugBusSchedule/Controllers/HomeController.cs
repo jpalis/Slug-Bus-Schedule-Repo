@@ -27,8 +27,9 @@ namespace SlugBusSchedule.Controllers
             string nearestBusStop = Map.findBusStop(lat, lon);
 
             //reroute user to bus card page
-            TempData["UserLocation"] = "populate this with the name of the user's location";
-            TempData["ClosestBusStop"] = "populate this with the name of the closest bus stop";
+            TempData["lat"] = lat;
+            TempData["lon"] = lon;
+            TempData["ClosestBusStop"] = nearestBusStop;
             return RedirectToAction("BusDisplay");
         }
 
@@ -36,7 +37,8 @@ namespace SlugBusSchedule.Controllers
         public IActionResult BusDisplay()
         {
             BusDisplayViewModel model = new BusDisplayViewModel();
-            model.UserLocation = TempData["UserLocation"].ToString();
+            model.UserLatitude = TempData["lat"].ToString();
+            model.UserLongitude = TempData["lon"].ToString();
             model.ClosestBusStop = TempData["ClosestBusStop"].ToString();
 
             string currentTime = DateTime.Now.ToString("hh:mm:ss");
