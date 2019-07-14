@@ -38,6 +38,7 @@ namespace SlugBusSchedule.Models
         public string Kresge { get; set; }
         public string PorterRachelCarson { get; set; }
         public string Oakes { get; set; }
+        public string WesternDr { get; set; }
 
 
     }

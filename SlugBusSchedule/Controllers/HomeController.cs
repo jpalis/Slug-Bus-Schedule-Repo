@@ -18,12 +18,13 @@ namespace SlugBusSchedule.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(IndexViewModel model)
+        public IActionResult Index(IndexViewModel model, [FromBody] Position position)
         {
-            //get string {latitude:"",longitude""} and parse into lat and longitude values
-
+            //get string {latitude:"",longitude""} and parse into lat and lon values
+            double lat = position.latitude;
+            double lon = position.longitude;
             //using latitude and longitute, find closest bus stop, and populate new BusDisplayViewModel to show user
-
+            string nearestBusStop = Map.findBusStop(lat, lon);
 
             //reroute user to bus card page
             TempData["UserLocation"] = "populate this with the name of the user's location";
@@ -35,7 +36,6 @@ namespace SlugBusSchedule.Controllers
         public IActionResult BusDisplay()
         {
             BusDisplayViewModel model = new BusDisplayViewModel();
-
             model.UserLocation = TempData["UserLocation"].ToString();
             model.ClosestBusStop = TempData["ClosestBusStop"].ToString();
 
