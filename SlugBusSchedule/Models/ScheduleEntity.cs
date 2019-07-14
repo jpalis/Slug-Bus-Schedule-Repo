@@ -9,10 +9,6 @@ namespace SlugBusSchedule.Models
 {
     public class SlugContext : DbContext
     {
-        public SlugContext(DbContextOptions<SlugContext> options)
-            : base(options)
-        { }
-
         public DbSet<Schedule> Schedules { get; set; }
     }
 
@@ -20,20 +16,20 @@ namespace SlugBusSchedule.Models
     {
         [Key]
         public int ID { get; set; }
-        public int BusNumber { get; set; }
+        public string BusNumber { get; set; }
         public string Street { get; set; }
 
         //arrival times for each bus stop
-        public DateTime Base { get; set; }
-        public DateTime Village { get; set; }
-        public DateTime EastRemote { get; set; }
-        public DateTime BookStore { get; set; }
-        public DateTime CrownMerill { get; set; }
-        public DateTime NineTen { get; set; }
-        public DateTime ScienceHill { get; set; }
-        public DateTime Kresge { get; set; }
-        public DateTime PorterRachelCarson { get; set; }
-        public DateTime Oakes { get; set; }
+        public string Base { get; set; }
+        public string Village { get; set; }
+        public string EastRemote { get; set; }
+        public string BookStore { get; set; }
+        public string CrownMerill { get; set; }
+        public string NineTen { get; set; }
+        public string ScienceHill { get; set; }
+        public string Kresge { get; set; }
+        public string PorterRachelCarson { get; set; }
+        public string Oakes { get; set; }
 
 
     }
