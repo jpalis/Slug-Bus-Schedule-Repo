@@ -5,6 +5,12 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\images\dominik-lange-Yt2kmYh_ilw-unsplash.jpg" />
+    <Content Remove="wwwroot\lib\images\samuel-foster-7Z1qxrjc1FI-unsplash.jpg" />
+    <Content Remove="wwwroot\lib\images\sid-verma-0fhuiJ4um94-unsplash.jpg" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
@@ -12,6 +18,13 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\images\dominik-lange-Yt2kmYh_ilw-unsplash.jpg" />
+    <None Include="wwwroot\lib\images\samuel-foster-7Z1qxrjc1FI-unsplash.jpg" />
+    <None Include="wwwroot\lib\images\sid-verma-0fhuiJ4um94-unsplash.jpg" />
   </ItemGroup>
 
 </Project>

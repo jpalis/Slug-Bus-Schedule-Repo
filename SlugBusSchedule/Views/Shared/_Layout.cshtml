@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Slug Bus Schedule</title>
 
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
@@ -13,11 +16,10 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
 
-
+    <script src="https://kit.fontawesome.com/11c6dcaa7e.js"></script>
 </head>
 
 <body style="background-color: #EEEEEE;">
@@ -33,17 +35,11 @@
         </div>
     </nav>
 
-    <div class="body-content container">
+    <div>
 
-        <br />
         @RenderBody()
-        <br />
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2019 - Slug Bus Schedule
-            </div>
-        </footer>
+        
     </div>
 
     <environment include="Development">
