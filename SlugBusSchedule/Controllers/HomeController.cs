@@ -15,6 +15,7 @@ namespace SlugBusSchedule.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult BusDisplay()
         {
             return View();
