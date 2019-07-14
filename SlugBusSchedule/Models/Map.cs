@@ -67,9 +67,58 @@ public class Map
     private static double lon5 = -122.05615;
     public static string findBusStop(double lat, double lon)
     {
-        string nearestBusStop=h3;
+        string nearestBusStop="";
+        string latSymbol;
+        //Decide latitude interval
+        if (lat < lata) 
+        {
+            latSymbol="a";
+        }else if (lata <= lat && lat < latb)
+        {
+             latSymbol="b";
+        }else if (latb <= lat && lat < latc)
+        {
+             latSymbol="c";
+        }else if (latc <= lat && lat < latd)
+        {
+             latSymbol="d";
+        }else if (latd <= lat && lat < late)
+        {
+             latSymbol="e";
+        }else if (late <= lat && lat < latf)
+        {
+             latSymbol="f";
+        }else if (latf <= lat && lat < latg)
+        {
+             latSymbol="g";
+        }else
+        {
+             latSymbol="h";
+        }
+        //Decide longitude
+        if (lon < lon1)
+        {
+            nearestBusStop = latSymbol + "1";
+        }else if (lon1 <= lon && lon < lon2)
+        {
+            nearestBusStop = latSymbol + "2";
+        }else if (lon2 <= lon && lon < lon3)  
+        {
+            nearestBusStop = latSymbol + "3";
+        }else if (lon3 <= lon && lon < lon4)
+        {
+            nearestBusStop = latSymbol + "4";
+        }else if (lon4 <= lon && lon < lon5)
+        {
+            nearestBusStop = latSymbol + "5";
+        }else
+        {
+            nearestBusStop = latSymbol + "6";
+        }
 
-        return h3;
+        return nearestBusStop;
     }
+
+      
 
 }
