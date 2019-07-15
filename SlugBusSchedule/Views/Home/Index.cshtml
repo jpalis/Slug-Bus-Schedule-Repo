@@ -1,10 +1,13 @@
-﻿@{
+﻿@model Position
+@{
     ViewData["Title"] = "Home Page";
 }
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
-    <input hidden name="LocationJson" id="userLocationForm" />
+    @Html.TextBoxFor(h => h.latitude, new { @id = "lat", @class = "d-none" })
+    @Html.TextBoxFor(h => h.longitude, new { @id = "lon", @class="d-none"})
+    <input id="submit" type="submit" value="Submit" hidden />
 }
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -21,46 +24,7 @@
                 <p>Something about bus stops and the santa cruz metro</p>
                 <p>
                     <!--This button will direct users to the bus card page with the user location-->
-                    <a class="btn btn-primary" href="javascript:getLocation()" role="button">Find your bus</a>
-                    <script>
-                        var x = document.getElementsByClassName("btn btn-primary");
-                        function getLocation() {
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(getPosition, showError);
-                            } else { 
-                                x.innerHTML = "Geolocation is not supported by this browser.";
-                            }
-                        }
-
-                        function getPosition(position) {
-                            var positionToSend = {latitude: "", longitude: ""};
-                            positionToSend.latitude = position.coords.latitude;
-                            positionToSend.longitude = position.coords.longitude;
-                            var dataToSend = JSON.stringify(positionToSend);
-
-                            var xhr = new XMLHttpRequest();
-                            xhr.open("POST", "Home/Index");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                            xhr.send(dataToSend);
-                        }
-
-                        function showError(error) {
-                            switch(error.code) {
-                                case error.PERMISSION_DENIED:
-                                    x.innerHTML = "User denied the request for Geolocation."
-                                break;
-                                case error.POSITION_UNAVAILABLE:
-                                    x.innerHTML = "Location information is unavailable."
-                                break;
-                                case error.TIMEOUT:
-                                    x.innerHTML = "The request to get user location timed out."
-                                break;
-                                case error.UNKNOWN_ERROR:
-                                    x.innerHTML = "An unknown error occurred."
-                                break;
-                            }
-}
-                    </script>
+                    <button id="sumbitBtn" class="btn btn-primary">Find your bus</button>
                 </p>
             </div>
         </div>
@@ -205,23 +169,51 @@
 
 <hr />
 
-<br />
-<br />
+<script>
+
+    $(document).ready(function () {
+
+        var x = document.getElementsByClassName("btn btn-primary");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(getPosition, showError);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function getPosition(position) {
+            $("#lat").attr('value', position.coords.latitude);
+            $("#lon").attr('value', position.coords.longitude);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
+        }
+
+        getLocation();
+
+        $("#sumbitBtn").click(function () {
+            $("#submit").click();
+
+        });
+
+        
 
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Use Science Hill during development</p>
 
-    <select form_id="GeographicLocation">
-        <option value="ScienceHill">Science Hill</option>
-    </select>
-    <form action="/" name="GeoLocation" method="get" id="GeographicLocation">
-        <button type="submit">Find bus routes</button>
-    </form>
-
-    <form action="/" name="GPSLocation" method="get" id="GPSLocation">
-        <button type="submit">Find my location</button>
-    </form>
-
-</div>
+    });
+</script>

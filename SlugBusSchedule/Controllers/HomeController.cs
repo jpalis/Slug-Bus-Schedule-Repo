@@ -16,11 +16,11 @@ namespace SlugBusSchedule.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(new Position());
         }
 
         [HttpPost]
-        public IActionResult Index([FromBody] Position position)
+        public IActionResult Index(Position position)
         {
             //get string {latitude:"",longitude""} and parse into lat and lon values
             double lat = position.latitude;
@@ -29,22 +29,17 @@ namespace SlugBusSchedule.Controllers
             string nearestBusStop = Map.findBusStop(lat, lon);
 
             //reroute user to bus card page
-            TempData["lat"] = lat;
-            TempData["lon"] = lon;
-            TempData["ClosestBusStop"] = nearestBusStop;
-            return RedirectToAction("BusDisplay");
+            return BusDisplay(lat.ToString(), lon.ToString(), nearestBusStop);
         }
         [HttpGet]
-        public IActionResult BusDisplay()
+        public IActionResult BusDisplay(string lat, string lon, string nearestBusStop)
         {
             BusDisplayViewModel model = new BusDisplayViewModel();
-            model.UserLatitude = TempData["lat"].ToString();
-            model.UserLongitude = TempData["lon"].ToString();
+            model.UserLatitude = lat;
+            model.UserLongitude = lon;
+            model.ClosestBusStop = nearestBusStop;
             model.BusData = new List<ArrivalData>();
-
-
-            //model.ClosestBusStop = TempData["ClosestBusStop"].ToString();
-            model.ClosestBusStop = "Kresge";
+            
 
             //string currentTime = DateTime.Now.ToString("hh:mm:ss");
             string currentTime = "08:15:00";
@@ -102,7 +97,7 @@ namespace SlugBusSchedule.Controllers
                 }
             }
 
-            return View(model);
+            return View("BusDisplay", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
