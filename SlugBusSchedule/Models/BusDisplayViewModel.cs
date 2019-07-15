@@ -10,6 +10,13 @@ namespace SlugBusSchedule.Models
         public string ClosestBusStop { get; set; }
         public string UserLatitude { get; set; }
         public string UserLongitude { get; set; }
-        public List<Schedule> BusData { get; set; }
+        public List<ArrivalData> BusData { get; set; }
+    }
+
+    public class ArrivalData
+    {
+        public string BusNumber { get; set; }
+        public string ArrivalTime { get; set; }
+        public string Street { get; set; }
     }
 }

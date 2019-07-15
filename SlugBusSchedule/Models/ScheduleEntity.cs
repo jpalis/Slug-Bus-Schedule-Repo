@@ -9,14 +9,23 @@ namespace SlugBusSchedule.Models
 {
     public class SlugContext : DbContext
     {
+        public SlugContext()
+        {
+        }
+
         public SlugContext(DbContextOptions<SlugContext> options)
             : base(options)
         { }
-        public SlugContext()
-        {
 
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            var connection = @"Server=tcp:sbs-sql-db.database.windows.net,1433;Initial Catalog=SBS-SQL-DB;Persist Security Info=False;User ID=jpalis;Password=JP62195!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+            builder.UseSqlServer(connection);
+            base.OnConfiguring(builder);
         }
 
+        
         public DbSet<Schedule> Schedules { get; set; }
     }
 
@@ -24,7 +33,7 @@ namespace SlugBusSchedule.Models
     {
         [Key]
         public int ID { get; set; }
-        public string BusNumber { get; set; }
+        public int BusNumber { get; set; }
         public string Street { get; set; }
 
         //arrival times for each bus stop
