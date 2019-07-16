@@ -1,7 +1,31 @@
-@model BusDisplayViewModel
+﻿@model BusDisplayViewModel
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
+
+<!-------------------------------------->
+
+<html>
+<head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+
+        html, body {
+            height: 100%;
+            margin: 1;
+            padding: 1;
+        }
+    </style>
+</head>
+<body>
     <div class="container">
         <br />
         <div class="row">
@@ -15,178 +39,180 @@
                 <div class="alert alert-info" role="alert">
                     User Longitude: @Model.UserLongitude
                 </div>
-                <div id="map" style="overflow: visible; position: relative;"></div>
             </div>
         </div>
 
-        <!-------------------------------------->
 
-        <html>
-        <head>
-            <title>Geolocation</title>
-            <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-            <meta charset="utf-8">
-            <style>
+        <div id="map" style="overflow: visible; position: absolute;"></div>
+        <!-- <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap">
+        </script> -->
+        <script>
+                    var busStop = "@Model.ClosestBusStop";
 
-                #map {
-                    height: 100%;
-                    width: 100%;
-                }
+                    var map, infoWindow;
+                    function initMap() {
 
-                html, body {
-                    height: 100%;
-                    margin: 1;
-                    padding: 1;
-                }
-            </style>
-        </head>
-        <body>
-
-            <!-- <script async defer
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap">
-         </script> -->
-            <script>
-
-                var map, infoWindow;
-                function initMap() {
-
-                    var scienceHill = { lat: 37.000003, lng: -122.062324 };
-                    var cowell = { lat: 36.997544, lng: -122.055055 };
-                    var porter = { lat: 36.993042, lng: -122.065233 };
-
-                    var merrill = { lat: 36.999132, lng: -122.055211 };
-                    var c10 = { lat: 37.000075, lng: -122.058333 };
-                    var kresge = { lat: 36.999364, lng: -122.064569 };
-                    var oakes = { lat: 36.990078, lng: -122.067224 };
-                    var eastRemote = { lat: 36.991491, lng: -122.054689 };
-
-
-                    /*var marker = new google.maps.Marker({
-                    position: myLatLng,
-                    map: map,
-                    title: 'Hello World!'
-                  });*/
+                        var Base = {lat: 36.977651, lng: -122.053684}
+                        var Village = {lat: 36.985924, lng: -122.053546}
+                        var eastRemote = { lat: 36.991491, lng: -122.054689 };
+                        var BookStore = { lat: 36.997544, lng: -122.055055 };
+                        var CrownMerrill = { lat: 36.999132, lng: -122.055211 };
+                        var NineTen = { lat: 37.000075, lng: -122.058333 };
+                        var ScienceHill = { lat: 37.000003, lng: -122.062324 };
+                        var Kresge = { lat: 36.999364, lng: -122.064569 };
+                        var PorterRachelCarson = { lat: 36.993042, lng: -122.065233 };
+                        var Oakes = { lat: 36.989944, lng: -122.067203 };
+                        var WesternDr = { lat: 36.978819, lng: -122.057740 };
 
 
                     map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: -35.397, lng: 150.644 },
-                        zoom: 15
+                            center: { lat: -35.397, lng: 150.644 },
+                            zoom: 15
                     });
-                    infoWindow = new google.maps.InfoWindow;
-
-                    var marker = new google.maps.Marker({
-                        position: scienceHill,
-                        map: map,
-                        title: 'Science Hill'
-                    });
-
-                    var marker1 = new google.maps.Marker({
-                        position: cowell,
-                        map: map,
-                        title: 'Cowell'
-                    });
-
-                    var marker2 = new google.maps.Marker({
-                        position: porter,
-                        map: map,
-                        title: 'Porter'
-                    });
-
-                    var marker3 = new google.maps.Marker({
-                        position: merrill,
-                        map: map,
-                        title: 'Merrill'
-                    });
-
-                    var marker4 = new google.maps.Marker({
-                        position: c10,
-                        map: map,
-                        title: 'College 10'
-                    });
-
-                    var marker5 = new google.maps.Marker({
-                        position: kresge,
-                        map: map,
-                        title: 'Kresge'
-                    });
-
-                    var marker6 = new google.maps.Marker({
-                        position: oakes,
-                        map: map,
-                        title: 'Oakes'
-                    });
-
-                    var marker7 = new google.maps.Marker({
-                        position: eastRemote,
-                        map: map,
-                        title: 'East Remote Lot'
-                    });
+                        infoWindow = new google.maps.InfoWindow;
 
 
-
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var pos = {
-
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            };
-                            //alert(position.coords.latitude);
-
-                            infoWindow.setPosition(pos);
-                            infoWindow.setContent('YOU ARE HERE');
-                            infoWindow.open(map);
-                            map.setCenter(pos);
-                        }, function () {
-                            handleLocationError(true, infoWindow, map.getCenter());
+                    if(busStop == "Base"){
+                        var marker = new google.maps.Marker({
+                            position: Base,
+                            map: map,
+                            title: 'Base'
                         });
-                    } else {
-                        handleLocationError(false, infoWindow, map.getCenter());
                     }
-                }
 
-                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent(browserHasGeolocation ?
-                        'No Geolocation' :
-                        'No Support.');
-                    infoWindow.open(map);
-                }
-            </script>
-            <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap">
-            </script>
-        </body>
-    </html>
+                    if(busStop == "Village"){
+                        var marker = new google.maps.Marker({
+                            position: Village,
+                            map: map,
+                            title: 'Village'
+                        });
+                    }
+
+                    if(busStop == "BookStore"){
+                        var marker = new google.maps.Marker({
+                            position: BookStore,
+                            map: map,
+                            title: 'BookStore'
+                        });
+                    }
+
+                    if(busStop == "CrownMerrill"){
+                        var marker = new google.maps.Marker({
+                            position: CrownMerrill,
+                            map: map,
+                            title: 'CrownMerrill'
+                        });
+                    }
+
+                    if(busStop == "NineTen"){
+                        var marker = new google.maps.Marker({
+                            position: NineTen,
+                            map: map,
+                            title: 'NineTen'
+                        });
+                    }
+
+                    if(busStop == "ScienceHill"){
+                        var marker = new google.maps.Marker({
+                            position: ScienceHill,
+                            map: map,
+                            title: 'ScienceHill'
+                        });
+                    }
+
+                    if(busStop == "Kresge"){
+                        var marker = new google.maps.Marker({
+                            position: Kresge,
+                            map: map,
+                            title: 'Kresge'
+                        });
+                    }
+
+                    if(busStop == "PorterRachelCarson"){
+                        var marker = new google.maps.Marker({
+                            position: PorterRachelCarson,
+                            map: map,
+                            title: 'PorterRachelCarson'
+                        });
+                    }
+
+                    if(busStop == "WesternDr"){
+                        var marker = new google.maps.Marker({
+                            position: WesternDr,
+                            map: map,
+                            title: 'WesternDr'
+                        });
+                    }
+
+                        // alert("gdgsdfg");
 
 
-    <!---------------------------------->
 
-    @foreach (var bus in Model.BusData)
-    {
-        <div class="row align-items-center">
 
-            <div class="card offset-3 col-md-6" style="max-width: 700px; padding-left: 0px !important;">
-                <div class="row no-gutters">
-                    <div class="col-md-5">
-                        <svg class="bd-placeholder-img" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#868e96"></rect>
-                            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Map Holder</text>
-                        </svg>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title">Bus Line: @bus.BusNumber</h5>
-                            <p class="card-text">Arrival Time: @bus.ArrivalTime</p>
-                            <p class="card-text"><small class="text-muted">@bus.Street</small></p>
-                        </div>
+
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function (position) {
+                                var pos = {
+
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude
+                                };
+                                //alert(position.coords.latitude);
+
+                                infoWindow.setPosition(pos);
+                                infoWindow.setContent('YOU ARE HERE');
+                                infoWindow.open(map);
+                                map.setCenter(pos);
+                            }, function () {
+                                handleLocationError(true, infoWindow, map.getCenter());
+                            });
+                        } else {
+                            handleLocationError(false, infoWindow, map.getCenter());
+                        }
+                    }
+
+                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent(browserHasGeolocation ?
+                            'No Geolocation' :
+                            'No Support.');
+                        infoWindow.open(map);
+                    }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap">
+        </script>
+</body>
+</html>
+
+
+<!---------------------------------->
+
+@foreach (var bus in Model.BusData)
+{
+    <div class="row align-items-center">
+        <div class="card offset-3 col-md-6" style="max-width: 700px; padding-left: 0px !important;">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <svg class="bd-placeholder-img" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Map Holder</text>
+                    </svg>
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">Bus Line: @bus.BusNumber</h5>
+                        <p class="card-text">Arrival Time: @bus.ArrivalTime</p>
+                        <p class="card-text"><small class="text-muted">@bus.Street</small></p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <br />
-        <br />
-    }
+    <br />
+    <br />
+}
     </div>
