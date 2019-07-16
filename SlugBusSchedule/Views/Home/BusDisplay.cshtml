@@ -1,31 +1,44 @@
 @model BusDisplayViewModel
 
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <div class="card bg-primary" style="width: 18rem;">
-                <img src="~/lib/images/user-icon.png" class="card-img-top" alt="...">
-
-                <div class="card-body">
-                    <h5 class="card-title text-center">Bus Line Number & Bus Stop</h5>
-                    <p class="card-text">Come quick text regarding the bus stop, and available route information</p>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="offset-lg-2 offset-md-2 col-lg-8 col-md-8 col-sm-12">
+                <div class="alert alert-info" role="alert">
+                    Closest Bus Stop: @Model.ClosestBusStop
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Bus Stop Location</li>
-                    <li class="list-group-item">Arrival Time</li>
-                    <li class="list-group-item">Bus Crowd Status</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Link to Map Direction</a>
+                <div class="alert alert-info" role="alert">
+                    User Latitude: @Model.UserLatitude
+                </div>
+                <div class="alert alert-info" role="alert">
+                    User Longitude: @Model.UserLongitude
                 </div>
             </div>
         </div>
+        @foreach (var bus in Model.BusData)
+        {
+            <div class="row align-items-center">
+                <div class="card offset-3 col-md-6" style="max-width: 700px; padding-left: 0px !important;">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <svg class="bd-placeholder-img" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#868e96"></rect>
+                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Map Holder</text>
+                            </svg>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title">Bus Line: @bus.BusNumber</h5>
+                                <p class="card-text">Arrival Time: @bus.ArrivalTime</p>
+                                <p class="card-text"><small class="text-muted">@bus.Street</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="col-4">
-            
-        </div>
-        <div class="col-4">
-            
-        </div>
+            <br />
+            <br />
+        }
     </div>
-</div>
