@@ -15,6 +15,7 @@
                 <div class="alert alert-info" role="alert">
                     User Longitude: @Model.UserLongitude
                 </div>
+                <div id="map" style="overflow: visible; position: relative;"></div>
             </div>
         </div>
 
@@ -40,7 +41,7 @@
             </style>
         </head>
         <body>
-            <div id="map"></div>
+
             <!-- <script async defer
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap">
          </script> -->
@@ -78,8 +79,6 @@
                         map: map,
                         title: 'Science Hill'
                     });
-
-                    // alert("gdgsdfg");
 
                     var marker1 = new google.maps.Marker({
                         position: cowell,
@@ -166,6 +165,7 @@
     @foreach (var bus in Model.BusData)
     {
         <div class="row align-items-center">
+
             <div class="card offset-3 col-md-6" style="max-width: 700px; padding-left: 0px !important;">
                 <div class="row no-gutters">
                     <div class="col-md-5">
