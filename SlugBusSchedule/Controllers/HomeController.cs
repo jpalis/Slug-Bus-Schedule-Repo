@@ -13,6 +13,13 @@ namespace SlugBusSchedule.Controllers
 {
     public class HomeController : Controller
     {
+
+        [HttpGet]
+        public IActionResult Landing()
+        {
+            return View("Home");
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -89,7 +96,7 @@ namespace SlugBusSchedule.Controllers
                         }
                     }
 
-                    if(data.ArrivalTime != null)
+                    if(data.ArrivalTime != "0")
                     {
                         model.BusData.Add(data);
                     }

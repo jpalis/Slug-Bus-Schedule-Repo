@@ -1,12 +1,19 @@
 ﻿@model Position
-@{
-    ViewData["Title"] = "Home Page";
+
+@section ShowBody{ 
+    <script>
+        $(document).ready(function () {
+            if ($("#main-content").hasClass("d-none")) {
+                $("#main-content").removeClass("d-none");
+            }
+         });
+    </script>
 }
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
     @Html.TextBoxFor(h => h.latitude, new { @id = "lat", @class = "d-none" })
-    @Html.TextBoxFor(h => h.longitude, new { @id = "lon", @class="d-none"})
+    @Html.TextBoxFor(h => h.longitude, new { @id = "lon", @class = "d-none" })
     <input id="submit" type="submit" value="Submit" hidden />
 }
 
@@ -22,10 +29,6 @@
             <div class="carousel-caption d-none d-md-block">
                 <h1>Welcome to the Slug Bus Schedule!</h1>
                 <p>Find the bus you need with the press of a button.</p>
-                <p>
-                    <!--This button will direct users to the bus card page with the user location-->
-                    <button id="sumbitBtn" class="btn btn-primary">Find your bus</button>
-                </p>
             </div>
         </div>
         <div class="carousel-item">
@@ -52,8 +55,37 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
 <div class="container">
+
+
+
+    <br />
+
+    <div class="row no-gutters">
+        <div class="offset-lg-3 col-sm-12 col-md-4 col-lg-4 text-right border-right-start">
+            <h1>Let's Get Started</h1>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="sonar-wrapper d-inline" id="sumbitBtn">
+                <div class="sonar-emitter text-white">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="sonar-wave">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <hr />
+
+    <br />
+    <br />
+    <br />
+
     <div class="row text-center">
         <div class="col-12">
             <h1>A simpler way to get around!</h1>
@@ -110,6 +142,7 @@
             <br />
 
             <img src="~/lib/images/user-icon.png" class="dev-cards img-circle" />
+            <br />
             <h2>Joshua Palis</h2>
             <p>
                 Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -124,6 +157,7 @@
             <br />
 
             <img src="~/lib/images/user-icon.png" class="dev-cards img-circle" />
+            <br />
             <h2>Calvin La</h2>
             <p>
                 Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -138,6 +172,7 @@
             <br />
 
             <img src="~/lib/images/user-icon.png" class="dev-cards img-circle" />
+            <br />
             <h2>Cyrus Hyatt</h2>
             <p>
                 Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -152,6 +187,7 @@
             <br />
 
             <img src="~/lib/images/user-icon.png" class="dev-cards img-circle" />
+            <br />
             <h2>Riwen Mao</h2>
             <p>
                 Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -211,7 +247,7 @@
 
         });
 
-        
+
 
 
 
