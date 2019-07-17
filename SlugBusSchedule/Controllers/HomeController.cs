@@ -17,17 +17,11 @@ namespace SlugBusSchedule.Controllers
         [HttpGet]
         public IActionResult Landing()
         {
-            return View("Home");
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View(new Position());
+            return View("Home", new Position());
         }
 
         [HttpPost]
-        public IActionResult Index(Position position)
+        public IActionResult Landing(Position position)
         {
             //get string {latitude:"",longitude""} and parse into lat and lon values
             double lat = position.latitude;
@@ -38,6 +32,14 @@ namespace SlugBusSchedule.Controllers
             //reroute user to bus card page
             return BusDisplay(lat.ToString(), lon.ToString(), nearestBusStop);
         }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            //about page
+            return View("Index");
+        }
+
         [HttpGet]
         public IActionResult BusDisplay(string lat, string lon, string nearestBusStop)
         {

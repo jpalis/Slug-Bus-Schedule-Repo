@@ -1,6 +1,6 @@
 ﻿
 .landing-content {
-    background-color: red;
+    background-color: #ffffff;
     background-size: 120% auto;
     position: fixed;
     padding: 0px;
@@ -15,7 +15,7 @@
         content: "";
         height: 0px;
         padding: 0px;
-        border: 110em solid #343a40 !important;
+        border: 110em solid #333 !important; /*Background landing*/
         position: absolute;
         left: 50%;
         top: 100%;
@@ -30,9 +30,9 @@
     }
 
 .profile-card {
-    background: #FFB300;
-    width: 56px;
-    height: 56px;
+    background: #0075DB; /*starting icon color*/
+    width: 50px;
+    height: 50px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -50,83 +50,50 @@
     animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
-    .profile-card header {
-        width: 179px;
-        height: 280px;
-        padding: 40px 20px 30px 20px;
-        display: inline-block;
-        float: left;
-        border-right: 2px dashed #EEEEEE;
-        background: #FFFFFF;
-        color: #000000;
-        margin-top: 50px;
-        opacity: 0;
-        text-align: center;
-        -webkit-animation: moveIn 1s 3.1s ease forwards;
-        animation: moveIn 1s 3.1s ease forwards;
-    }
+.profile-card header {
+    width: 179px;
+    height: 280px;
+    padding: 40px 20px 30px 20px;
+    padding-bottom: 64px !important;
+    padding-top: 64px !important;
+    display: inline-block;
+    float: left;
+    border-right: 2px dashed #EEEEEE;
+    background: #FFFFFF;
+    color: #000000;
+    margin-top: 50px;
+    opacity: 0;
+    text-align: center;
+    -webkit-animation: moveIn 1s 3.1s ease forwards;
+    animation: moveIn 1s 3.1s ease forwards;
+}
 
-        .profile-card header h1 {
-            color: #FF5722;
-        }
+.profile-card header h1 {
+    color: #0075DB;
+}
 
-        .profile-card header a {
-            display: inline-block;
-            text-align: center;
-            position: relative;
-            margin: 25px 30px;
-        }
+.profile-card header a {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    margin: 25px 30px;
+}
 
-            .profile-card header a:after {
-                position: absolute;
-                content: "";
-                bottom: 3px;
-                right: 3px;
-                width: 20px;
-                height: 20px;
-                border: 4px solid #FFFFFF;
-                -webkit-transform: scale(0);
-                transform: scale(0);
-                background: -webkit-linear-gradient(top, #2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
-                background: linear-gradient(#2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
-                -webkit-border-radius: 50%;
-                border-radius: 50%;
-                -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-                box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-                -webkit-animation: scaleIn 0.3s 3.5s ease forwards;
-                animation: scaleIn 0.3s 3.5s ease forwards;
-            }
+.profile-card header a > img {
+    padding: 1rem !important;
+    width: 120px;
+    max-width: 100%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: -webkit-box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
+    -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+}
 
-            .profile-card header a > img {
-                padding: 1rem !important;
-                width: 120px;
-                max-width: 100%;
-                -webkit-border-radius: 50%;
-                border-radius: 50%;
-                -webkit-transition: -webkit-box-shadow 0.3s ease;
-                transition: box-shadow 0.3s ease;
-                -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
-                box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
-            }
-
-            .profile-card header a:hover > img {
-                -webkit-box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
-                box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
-            }
-
-    .profile-card .profile-bio {
-        width: 175px;
-        height: 180px;
-        display: inline-block;
-        float: right;
-        padding: 50px 20px 30px 20px;
-        background: #FFFFFF;
-        color: #333333;
-        margin-top: 50px;
-        text-align: center;
-        opacity: 0;
-        -webkit-animation: moveIn 1s 3.1s ease forwards;
-        animation: moveIn 1s 3.1s ease forwards;
+    .profile-card header a:hover > img {
+        -webkit-box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
     }
 
 @media screen and (min-aspect-ratio: 4/3) {
@@ -169,6 +136,7 @@
 
 @media screen and (min-height: 480px) {
     .profile-card {
+
         -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
         animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
     }
@@ -177,17 +145,11 @@
             width: auto;
             height: auto;
             padding: 30px 20px;
+            padding-bottom: 80px !important;
+            padding-top: 63px !important;
             display: block;
             float: none;
             border-right: none;
-        }
-
-        .profile-card .profile-bio {
-            width: auto;
-            height: auto;
-            padding: 15px 20px 30px 20px;
-            display: block;
-            float: none;
         }
 }
 
@@ -337,7 +299,7 @@
 
 @-webkit-keyframes moveUp {
     0% {
-        background-color: #FFB300;
+        background-color: #FFB300 !important;
         top: 100%;
     }
 
@@ -347,13 +309,13 @@
 
     100% {
         top: 50%;
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 }
 
 @keyframes moveUp {
     0% {
-        background-color: #FFB300;
+        background-color: #FFB300 !important;
         top: 100%;
     }
 
@@ -363,13 +325,13 @@
 
     100% {
         top: 50%;
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 }
 
 @-webkit-keyframes materia_landscape {
     0% {
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 
     50% {
@@ -379,14 +341,14 @@
     100% {
         width: 440px;
         height: 280px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
         -webkit-border-radius: 4px;
     }
 }
 
 @keyframes materia_landscape {
     0% {
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 
     50% {
@@ -396,14 +358,14 @@
     100% {
         width: 440px;
         height: 280px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
         border-radius: 4px;
     }
 }
 
 @-webkit-keyframes materia_portrait {
     0% {
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 
     50% {
@@ -413,14 +375,14 @@
     100% {
         width: 280px;
         height: 440px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
         -webkit-border-radius: 4px;
     }
 }
 
 @keyframes materia_portrait {
     0% {
-        background-color: #E0E0E0;
+        background-color: #E0E0E0 !important;
     }
 
     50% {
@@ -430,7 +392,7 @@
     100% {
         width: 280px;
         height: 440px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
         border-radius: 4px;
     }
 }
@@ -443,7 +405,7 @@
 
     100% {
         opacity: 1;
-        margin-top: -20px;
+        margin-top: 0px;
     }
 }
 
@@ -455,7 +417,7 @@
 
     100% {
         opacity: 1;
-        margin-top: -20px;
+        margin-top: 0px;
     }
 }
 
@@ -614,66 +576,6 @@ body {
 }
 
 /*-----------------------------------------------------------LOCATION START BUTTON*/
-
-/* Prevent scrollbars to appear when waves go out of bound */
-.sonar-wrapper {
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-    padding: 2rem 0;
-}
-
-/* The circle */
-.sonar-emitter {
-    position: relative;
-    margin-top: 2rem;
-    margin-left: 2rem;
-    padding-top: 0.8rem;
-    padding-left: 1.15rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 9999px;
-    background-color: #0075DB;
-}
-
-/* the 'wave', same shape and size as its parent */
-.sonar-wave {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 9999px;
-    background-color: #0075DB;
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.sonar-wave {
-    -webkit-animation: sonarWave 2s linear infinite;
-    -moz-animation: sonarWave 2s linear infinite;
-    animation: sonarWave 2s linear infinite;
-}
-@keyframes sonarWave {
-    from {
-        opacity: 0.4;
-    }
-
-    to {
-        transform: scale(3);
-        opacity: 0;
-    }
-}
-@-webkit-keyframes sonarWave{
-    from{
-        opacity: 0.4;
-    }
-    to{
-        transform: scale(3);
-        opacity: 0;
-    }
-}
 
 .border-right-start {
     padding: 2rem;

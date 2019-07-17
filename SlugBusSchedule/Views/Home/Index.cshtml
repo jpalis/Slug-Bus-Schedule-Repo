@@ -1,6 +1,4 @@
-﻿@model Position
-
-@section ShowBody{ 
+﻿@section ShowBody{ 
     <script>
         $(document).ready(function () {
             if ($("#main-content").hasClass("d-none")) {
@@ -8,13 +6,6 @@
             }
          });
     </script>
-}
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    @Html.TextBoxFor(h => h.latitude, new { @id = "lat", @class = "d-none" })
-    @Html.TextBoxFor(h => h.longitude, new { @id = "lon", @class = "d-none" })
-    <input id="submit" type="submit" value="Submit" hidden />
 }
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -57,32 +48,6 @@
 </div>
 <div class="container">
 
-
-
-    <br />
-
-    <div class="row no-gutters">
-        <div class="offset-lg-3 col-sm-12 col-md-4 col-lg-4 text-right border-right-start">
-            <h1>Let's Get Started</h1>
-        </div>
-        <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="sonar-wrapper d-inline" id="sumbitBtn">
-                <div class="sonar-emitter text-white">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="sonar-wave">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <br />
-    <br />
-
-    <hr />
-
-    <br />
     <br />
     <br />
 
@@ -205,51 +170,4 @@
 
 <hr />
 
-<script>
 
-    $(document).ready(function () {
-
-        var x = document.getElementsByClassName("btn btn-primary");
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(getPosition, showError);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function getPosition(position) {
-            $("#lat").attr('value', position.coords.latitude);
-            $("#lon").attr('value', position.coords.longitude);
-        }
-
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    x.innerHTML = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    x.innerHTML = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    x.innerHTML = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    x.innerHTML = "An unknown error occurred."
-                    break;
-            }
-        }
-
-        getLocation();
-
-        $("#sumbitBtn").click(function () {
-            $("#submit").click();
-
-        });
-
-
-
-
-
-    });
-</script>
