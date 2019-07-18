@@ -1,26 +1,6 @@
 ﻿@model BusDisplayViewModel
 
 @section ShowBody{
-
-    <!--<style>
-
-         #map {
-             height: 100%;
-             width: 100%;
-         }
-
-
-         html, body {
-             height: 100%;
-             margin: 1;
-             padding: 1;
-         }
-     </style>
-
-     <div id="map" style="overflow: visible; position: absolute;">
-
-     </div> -->
-
     <script>
         $(document).ready(function () {
             if ($("#main-content").hasClass("d-none")) {
@@ -30,11 +10,8 @@
     </script>
 }
 
-<!--<div id="map" style="overflow: visible; position: absolute;">
-
-</div> -->
-
 <br />
+
 <div class="row">
     <div class="offset-lg-2 offset-md-2 col-lg-8 col-md-8 col-sm-12">
         <div class="alert alert-info" role="alert">
@@ -130,24 +107,19 @@
     <br />
 }
 
-<head>
-
-    <style>
-
-        #map {
-            height: 50%;
-            width: 100%;
-        }
+<style>
+    #map {
+        height: 50%;
+        width: 100%;
+    }
 
 
-        html, body {
-            height: 100%;
-            margin: 1;
-            padding: 1;
-        }
-    </style>
-</head>
-
+    html, body {
+        height: 100%;
+        margin: 1;
+        padding: 1;
+    }
+</style>
 
 <div id="map" style="overflow: visible; position: absolute;"></div>
 
