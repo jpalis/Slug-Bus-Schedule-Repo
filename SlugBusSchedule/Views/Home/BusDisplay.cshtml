@@ -1,6 +1,26 @@
 ﻿@model BusDisplayViewModel
 
 @section ShowBody{
+
+    <!--<style>
+
+         #map {
+             height: 100%;
+             width: 100%;
+         }
+
+
+         html, body {
+             height: 100%;
+             margin: 1;
+             padding: 1;
+         }
+     </style>
+
+     <div id="map" style="overflow: visible; position: absolute;">
+
+     </div> -->
+
     <script>
         $(document).ready(function () {
             if ($("#main-content").hasClass("d-none")) {
@@ -10,9 +30,9 @@
     </script>
 }
 
-<div id="map" style="overflow: visible; position: absolute;">
+<!--<div id="map" style="overflow: visible; position: absolute;">
 
-</div>
+</div> -->
 
 <br />
 <div class="row">
@@ -110,10 +130,29 @@
     <br />
 }
 
+<head>
 
+    <style>
+
+        #map {
+            height: 50%;
+            width: 100%;
+        }
+
+
+        html, body {
+            height: 100%;
+            margin: 1;
+            padding: 1;
+        }
+    </style>
+</head>
+
+
+<div id="map" style="overflow: visible; position: absolute;"></div>
 
 <script>
-    $(document).ready(function () {
+
         var busStop = "@Model.ClosestBusStop";
 
         var map, infoWindow;
@@ -138,11 +177,30 @@
             infoWindow = new google.maps.InfoWindow;
 
 
+
+
+
         if(busStop == "Base"){
             var marker = new google.maps.Marker({
                 position: Base,
                 map: map,
                 title: 'Base'
+            });
+        }
+
+            if(busStop == "EastRemote"){
+            var marker = new google.maps.Marker({
+                position: eastRemote,
+                map: map,
+                title: 'Base'
+            });
+        }
+
+        if(busStop == "Oakes"){
+            var marker = new google.maps.Marker({
+                position: Oakes,
+                map: map,
+                title: 'Oakes'
             });
         }
 
@@ -238,7 +296,7 @@
                 'No Support.');
             infoWindow.open(map);
         }
-    });
+
 
 </script>
 
