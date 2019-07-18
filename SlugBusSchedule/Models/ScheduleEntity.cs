@@ -20,8 +20,10 @@ namespace SlugBusSchedule.Models
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             var connection = @"Server=tcp:sbs-sql-db.database.windows.net,1433;Initial Catalog=SBS-SQL-DB;Persist Security Info=False;User ID=jpalis;Password=JP62195!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-
-            builder.UseSqlServer(connection);
+            builder.UseSqlServer(connection, b =>
+            {
+                b.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
             base.OnConfiguring(builder);
         }
 
