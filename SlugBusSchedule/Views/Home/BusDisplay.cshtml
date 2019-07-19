@@ -12,19 +12,7 @@
 
 <br />
 
-<div class="row">
-    <div class="offset-lg-2 offset-md-2 col-lg-8 col-md-8 col-sm-12">
-        <div class="alert alert-info" role="alert">
-            Closest Bus Stop: @Model.ClosestBusStop
-        </div>
-        <div class="alert alert-info" role="alert">
-            User Latitude: @Model.UserLatitude
-        </div>
-        <div class="alert alert-info" role="alert">
-            User Longitude: @Model.UserLongitude
-        </div>
-    </div>
-</div>
+
 
 <div class="pad">
     <!-- Modal -->
@@ -41,6 +29,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row ">
+                    <div class="offset-1 col-10">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">
+                                <i class="fas fa-map-pin"></i> Closest Bus Stop: @Model.ClosestBusStop
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">
+                                <i class="fas fa-compass"></i> User Latitude: @Model.UserLatitude
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">
+                                <i class="far fa-compass"></i> User Longitude: @Model.UserLongitude
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
                 </div>
@@ -50,11 +53,11 @@
 
     <div class="row">
 
-        <div class="col-sm-12 offset-md-4 offset-lg-4 col-md-4 col-lg-4">
+        <div class="offset-sm-2 col-sm-8 offset-md-4 offset-lg-4 col-md-4 col-lg-4">
             <br />
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fas fa-map-marker-alt"></i> View Bus Stop Location
             </button>
             <br />
@@ -64,7 +67,7 @@
     <div class="row">
         @foreach (var bus in Model.BusData)
         {
-            <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="offset-sm-2 offset-md-0 offset-lg-0 col-md-4 col-lg-4">
                 <div class="card-container">
                     <div class="card">
                         <div class="front">
@@ -139,14 +142,6 @@
     </div>
 
 </div>
-
-
-<style>
-    #map {
-        height: 50%;
-        width: 100%;
-    }
-</style>
 <script>
 
         var busStop = "@Model.ClosestBusStop";
