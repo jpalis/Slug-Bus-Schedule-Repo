@@ -62,7 +62,7 @@ public class Map
     private static double latf = 36.995066;
     private static double latg = 36.998631;
     private static double lon1 = -122.066329;
-    private static double lon2 = -122.063475;
+    private static double lon2 = -122.063748;
     private static double lon3 = -122.060331;
     private static double lon4 = -122.05626;
     private static double lon5 = -122.05615;
