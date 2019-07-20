@@ -50,7 +50,7 @@ namespace SlugBusSchedule.Controllers
             model.BusData = new List<ArrivalData>();
             
 
-            string currentTime = DateTime.Now.ToString("hh:mm:ss");
+            string currentTime = "14:13:00";//DateTime.Now.ToString("hh:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
