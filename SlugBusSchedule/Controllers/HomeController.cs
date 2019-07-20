@@ -49,7 +49,7 @@ namespace SlugBusSchedule.Controllers
             model.BusData = new List<ArrivalData>();
             
 
-            string currentTime = DateTime.Now.ToString("hh:mm:ss");
+            string currentTime = "14:13:00";//DateTime.Now.ToString("hh:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
@@ -91,7 +91,11 @@ namespace SlugBusSchedule.Controllers
                             }
                             else
                             {
-                                data.ArrivalTime = p.GetValue(e).ToString();
+                                string time = p.GetValue(e).ToString();
+                                string hours = time.Substring(0,2)
+                                int h1 = Int32.Parse(hours);
+                                if(h1>12) h1-12;
+                                data.ArrivalTime = h1.ToString() + time.Substring(2) +("PM");
                             }
                         }
                     }
