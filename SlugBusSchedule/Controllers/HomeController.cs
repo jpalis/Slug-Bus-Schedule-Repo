@@ -49,7 +49,7 @@ namespace SlugBusSchedule.Controllers
             model.BusData = new List<ArrivalData>();
             
 
-            string currentTime = "14:13:00";//DateTime.Now.ToString("hh:mm:ss");
+            string currentTime = DateTime.Now.ToString("hh:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
@@ -91,13 +91,7 @@ namespace SlugBusSchedule.Controllers
                             }
                             else
                             {
-                                string time = p.GetValue(e).ToString();
-                                string hours = time.Substring(0, 2);
-                                int h1 = Int32.Parse(hours);
-                                if (h1 > 12) {
-                                    h1 = h1 - 12;
-                                }
-                                data.ArrivalTime = h1.ToString() + time.Substring(2) +("PM");
+                                data.ArrivalTime = p.GetValue(e).ToString();
                             }
                         }
                     }
@@ -118,8 +112,6 @@ namespace SlugBusSchedule.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
         public static Func<T, T> DynamicSelectGenerator<T>(string Fields = "")
         {
             string[] EntityFields;
@@ -161,6 +153,9 @@ namespace SlugBusSchedule.Controllers
             return lambda.Compile();
         }
 
-
+        public string UpdateBusCapacity(BusCapacityModel model)
+        {
+            return "";
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace SlugBusSchedule.Models
             base.OnConfiguring(builder);
         }
 
-        
         public DbSet<Schedule> Schedules { get; set; }
     }
 
