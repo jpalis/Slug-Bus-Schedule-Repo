@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -48,8 +48,10 @@ namespace SlugBusSchedule.Controllers
             model.ClosestBusStop = nearestBusStop;
             model.BusData = new List<ArrivalData>();
             
+            
+            
 
-            string currentTime = DateTime.Now.ToString("hh:mm:ss");
+            string currentTime =  DateTime.Now.ToString("hh:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
@@ -65,6 +67,7 @@ namespace SlugBusSchedule.Controllers
                 foreach(var item in busList)
                 {
                     ArrivalData data = new ArrivalData();
+                    
                     //Dynamically Choose Fields
                     string fields = "BusNumber,Street,ID," + model.ClosestBusStop;
 
@@ -97,7 +100,21 @@ namespace SlugBusSchedule.Controllers
                             {
                                 if(p.Name != "LowCapacity" && p.Name != "MediumCapacity" && p.Name != "HighCapacity" && p.Name != "CurrentStatus")
                                 {
-                                    data.ArrivalTime = p.GetValue(e).ToString();
+                                    
+                                    string timed = p.GetValue(e).ToString();
+                                    data.ArrivalTime1 = timed;
+                                    string timed1 = timed.Substring(0,2);
+                                    int h1 = Int32.Parse(timed1);
+                                 
+                                
+                                if (h1 > 12) {
+                                    h1 = h1 - 12;
+                                     data.ArrivalTime = h1.ToString() + timed.Substring(2) +("PM");
+                                }
+                                else 
+                                {
+                                    data.ArrivalTime = timed + ("AM");
+                                }
                                 }
                             }
                         }
@@ -106,6 +123,7 @@ namespace SlugBusSchedule.Controllers
                     if(data.ArrivalTime != "0" && !string.IsNullOrEmpty(data.ArrivalTime))
                     {
                         model.BusData.Add(data);
+                        
                     }
                     
                 }
