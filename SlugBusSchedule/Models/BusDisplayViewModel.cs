@@ -15,6 +15,7 @@ namespace SlugBusSchedule.Models
 
     public class ArrivalData
     {
+        public int ID { get; set; }
         public string BusNumber { get; set; }
         public string ArrivalTime { get; set; }
         public string Street { get; set; }

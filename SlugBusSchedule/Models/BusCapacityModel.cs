@@ -7,9 +7,8 @@ namespace SlugBusSchedule.Models
 {
     public class BusCapacityModel
     {
-        public int Low { get; set; }
-        public int Medium { get; set; }
-        public int High { get; set; }
+        public int ID { get; set; }
+        public string UserStatusInput { get; set; }
         public string CurrentStatus { get; set; }
     }
 }

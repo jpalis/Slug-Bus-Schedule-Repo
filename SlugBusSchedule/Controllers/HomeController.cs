@@ -66,7 +66,7 @@ namespace SlugBusSchedule.Controllers
                 {
                     ArrivalData data = new ArrivalData();
                     //Dynamically Choose Fields
-                    string fields = "BusNumber,Street," + model.ClosestBusStop;
+                    string fields = "BusNumber,Street,ID," + model.ClosestBusStop;
 
                     //select 
                         
@@ -89,14 +89,21 @@ namespace SlugBusSchedule.Controllers
                             {
                                 data.BusNumber = item.ToString();
                             }
+                            else if(p.Name == "ID")
+                            {
+                                data.ID = e.ID;
+                            }
                             else
                             {
-                                data.ArrivalTime = p.GetValue(e).ToString();
+                                if(p.Name != "LowCapacity" && p.Name != "MediumCapacity" && p.Name != "HighCapacity" && p.Name != "CurrentStatus")
+                                {
+                                    data.ArrivalTime = p.GetValue(e).ToString();
+                                }
                             }
                         }
                     }
 
-                    if(data.ArrivalTime != "0")
+                    if(data.ArrivalTime != "0" && !string.IsNullOrEmpty(data.ArrivalTime))
                     {
                         model.BusData.Add(data);
                     }
@@ -155,7 +162,70 @@ namespace SlugBusSchedule.Controllers
 
         public string UpdateBusCapacity(BusCapacityModel model)
         {
-            return "";
+            string currenStatus;
+
+            int busCapacityUpdateAmount;
+            if(model.UserStatusInput == "low")
+            {
+                busCapacityUpdateAmount = 1;
+            }
+            else if(model.UserStatusInput == "medium")
+            {
+                busCapacityUpdateAmount = 3;
+            }
+            else
+            {
+                busCapacityUpdateAmount = 5;
+            }
+
+            using (var db = new SlugContext())
+            {
+                Schedule result = (Schedule)db.Schedules.Where(j => j.ID == model.ID).FirstOrDefault();
+                if(result != null)
+                {
+
+                    if (model.UserStatusInput == "low")
+                    {
+                        result.LowCapacity +=  busCapacityUpdateAmount;
+                    }
+                    else if (model.UserStatusInput == "medium")
+                    {
+                        result.MediumCapacity += busCapacityUpdateAmount;
+                    }
+                    else
+                    {
+                        result.HighCapacity += busCapacityUpdateAmount;
+                    }
+
+                    if(result.LowCapacity > result.MediumCapacity)
+                    {
+                        if(result.LowCapacity > result.HighCapacity)
+                        {
+                            result.CurrentStatus = "low";
+                        }
+                        else
+                        {
+                            result.CurrentStatus = "high";
+                        }
+                    }
+                    else
+                    {
+                        if (result.MediumCapacity > result.HighCapacity)
+                        {
+                            result.CurrentStatus = "medium";
+                        }
+                        else
+                        {
+                            result.CurrentStatus = "high";
+                        }
+                    }
+                }
+
+                currenStatus = result.CurrentStatus;
+                db.SaveChanges();
+            }
+
+            return currenStatus;
         }
     }
 }

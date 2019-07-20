@@ -35,12 +35,6 @@
                                 <a href="#" class="list-group-item list-group-item-action list-group-item-info">
                                     <i class="fas fa-map-pin"></i> Closest Bus Stop: @Model.ClosestBusStop
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action list-group-item-info">
-                                    <i class="fas fa-compass"></i> User Latitude: @Model.UserLatitude
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action list-group-item-info">
-                                    <i class="far fa-compass"></i> User Longitude: @Model.UserLongitude
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -74,7 +68,7 @@
         @foreach (var bus in Model.BusData)
         {
 
-            <div class="offset-sm-2 offset-md-0 offset-lg-0 col-md-4 col-lg-4">
+            <div class="offset-sm-2 offset-md-0 offset-lg-0 col-sm-8 col-md-4 col-lg-4">
                 <div class="card-container">
                     <div class="card">
                         <div class="front">
@@ -99,7 +93,7 @@
                                 </div>
                                 <div class="footer">
                                     <div class="rating text-center">
-                                        <i class="fas fa-map-marked-alt"></i>@Model.ClosestBusStop
+                                        <i class="fas fa-map-marked-alt"></i> @Model.ClosestBusStop
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +101,7 @@
                         <div class="back">
                             <div class="header">
                                 <h5 class="motto">
-                                    <i class="fas fa-map-marked-alt"></i>@Model.ClosestBusStop
+                                    <i class="fas fa-map-marked-alt"></i> @Model.ClosestBusStop
                                 </h5>
                             </div>
                             <div class="content">
@@ -115,27 +109,37 @@
                                     <div class="text-center">
                                         <button class="btn btn-info text-center" type="button" disabled>
                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                            Live Bus Capacity Status
+                                            Report Bus Crowd Size
                                         </button>
                                     </div>
                                     <div class="stats-container">
-                                        <div class="stats text-danger">
-                                            <h3>235</h3>
-                                            <h2>
-                                                <i class="fas fa-users"></i>
-                                            </h2>
+                                        <div class="stats">
+                                            <h5 class="text-danger">High</h5>
+                                            <br />
+                                            <button type="button" class="btn btn-danger capacity-btn text-white" value="low">
+                                                <h2>
+                                                    <i class="fas fa-users"></i>
+                                                </h2>
+                                            </button>
                                         </div>
-                                        <div class="stats text-warning">
-                                            <h3>114</h3>
-                                            <h2>
-                                                <i class="fas fa-user-friends"></i>
-                                            </h2>
+                                        <div class="stats">
+                                            <h5 class="text-warning">Medium</h5>
+                                            <br />
+                                            <button type="button" class="btn btn-warning capacity-btn text-white" value="medium">
+                                                <h2>
+                                                    <i class="fas fa-user-friends"></i>
+                                                </h2>
+                                            </button>
                                         </div>
-                                        <div class="stats text-success">
-                                            <h3>35</h3>
-                                            <h2>
-                                                <i class="fas fa-user"></i>
-                                            </h2>
+                                        <div class="stats">
+                                            <h5 class="text-success">Low</h5>
+                                            <br />
+                                            <button type="button" class="btn btn-success capacity-btn text-white" value="high">
+                                                <h2>
+                                                    <i class="fas fa-user"></i>
+                                                </h2>
+                                            </button>
+
                                         </div>
                                     </div>
 
@@ -149,6 +153,13 @@
     </div>
 
 </div>
+<script>
+    $(document).ready(function () {
+            
+        });
+</script>
+
+
 <script>
 
         var busStop = "@Model.ClosestBusStop";

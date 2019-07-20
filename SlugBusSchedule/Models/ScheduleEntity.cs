@@ -49,7 +49,9 @@ namespace SlugBusSchedule.Models
         public string PorterRachelCarson { get; set; }
         public string Oakes { get; set; }
         public string WesternDr { get; set; }
-
-
+        public int LowCapacity { get; set; }
+        public int MediumCapacity { get; set; }
+        public int HighCapacity { get; set; }
+        public string CurrentStatus { get; set; }
     }
 }
