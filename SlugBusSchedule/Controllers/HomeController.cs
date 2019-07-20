@@ -34,10 +34,9 @@ namespace SlugBusSchedule.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(BusDisplayViewModel model)
         {
-            //about page
-            return View("Index");
+            return View("Index", model);
         }
 
         [HttpGet]

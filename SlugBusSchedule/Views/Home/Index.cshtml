@@ -1,10 +1,14 @@
-﻿@section ShowBody{ 
+﻿@model BusDisplayViewModel
+
+@Html.DisplayFor(m => m.ClosestBusStop)
+
+@section ShowBody{
     <script>
         $(document).ready(function () {
             if ($("#main-content").hasClass("d-none")) {
                 $("#main-content").removeClass("d-none");
             }
-         });
+        });
     </script>
 }
 
@@ -169,5 +173,6 @@
 <br />
 
 <hr />
+
 
 
