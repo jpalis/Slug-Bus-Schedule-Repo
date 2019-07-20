@@ -1,4 +1,4 @@
-﻿@model BusDisplayViewModel
+@model BusDisplayViewModel
 
 @section ShowBody{
     <script>
@@ -65,8 +65,36 @@
     <br />
 
     <div class="row">
-        @foreach (var bus in Model.BusData)
+        @foreach (var bus in Model.BusData) 
         {
+            <script>
+		// Set the date we're counting down to
+		var now = new Date("January 1, 1970 @bus.ArrivalTime1");
+		var goal = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+
+  		// Get today's date and time
+  		var now = new Date();
+  		var seconds = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+
+ 		 // Find the distance between now and the count down date
+ 		 var distance = goal - seconds;
+			
+  		var minutes = Math.floor(distance/60);
+		var seconds = distance %60;
+
+  		// Display the result in the element with id="demo"
+  		document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s " ;
+
+  		// If the count down is finished, write some text 
+  		if (distance < 0) {
+   		 clearInterval(x);
+    		 document.getElementById("demo").innerHTML = "EXPIRED";
+  		}
+		}, 1000);
+</script>
 
             <div class="offset-sm-2 offset-md-0 offset-lg-0 col-sm-8 col-md-4 col-lg-4">
                 <div class="card-container">
@@ -85,10 +113,13 @@
                                         @bus.BusNumber
                                     </h2>
                                     <h3 class="profession">@bus.Street</h3>
-
+                                    
                                     <h2 class="text-center text-info">
                                         <i class="fas fa-clock"></i>
-                                        @bus.ArrivalTime
+                                        @bus.ArrivalTime         
+                                        <p id="demo"></p>
+
+
                                     </h2>
                                 </div>
                                 <div class="footer">
@@ -162,141 +193,150 @@
 
 <script>
 
-    var pos;
-    var BusStop = "@Model.ClosestBusStop";
-function initMap() {
-var infoWindow;
-var map;
-  var Base = {lat: 36.977651, lng: -122.053684};
+        var busStop = "@Model.ClosestBusStop";
 
-  var Village = { lat: 36.985924, lng: -122.053546 };
-  var EastRemote = { lat: 36.991491, lng: -122.054689 };
-  var BookStore = { lat: 36.997544, lng: -122.055055 };
-  var CrownMerrill = { lat: 36.999132, lng: -122.055211 };
-  var NineTen = { lat: 37.000075, lng: -122.058333 };
-  var ScienceHill = { lat: 37.000003, lng: -122.062324 };
-  var Kresge = { lat: 36.999364, lng: -122.064569 };
-  var PorterRachelCarson = { lat: 36.993042, lng: -122.065233 };
-  var Oakes = { lat: 36.989944, lng: -122.067203 };
-  var WesternDr = { lat: 36.978819, lng: -122.057740 };
-  
-  
-  var pointA = new google.maps.LatLng(36.999364, -122.064569);
-  var pointB = new google.maps.LatLng(36.997544, -122.055055);
-    myOptions = {
-      zoom: 15,
-      center: pointA
-    },
-    map = new google.maps.Map(document.getElementById('map'), myOptions),
-    directionsService = new google.maps.DirectionsService,
-    directionsDisplay = new google.maps.DirectionsRenderer({
-        map: map,
-       preserveViewport: true
-    });
-    
-    infoWindow = new google.maps.InfoWindow;
-    
-    if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+        var map, infoWindow;
+        function initMap() {
+            var Base = {lat: 36.977651, lng: -122.053684}
+            var Village = {lat: 36.985924, lng: -122.053546}
+            var eastRemote = { lat: 36.991491, lng: -122.054689 };
+            var BookStore = { lat: 36.997544, lng: -122.055055 };
+            var CrownMerrill = { lat: 36.999132, lng: -122.055211 };
+            var NineTen = { lat: 37.000075, lng: -122.058333 };
+            var ScienceHill = { lat: 37.000003, lng: -122.062324 };
+            var Kresge = { lat: 36.999364, lng: -122.064569 };
+            var PorterRachelCarson = { lat: 36.993042, lng: -122.065233 };
+            var Oakes = { lat: 36.989944, lng: -122.067203 };
+            var WesternDr = { lat: 36.978819, lng: -122.057740 };
 
-		
-            infoWindow.open(map);
-  
-  
-  if(BusStop == "Base"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, Base);
-  }
-  
-  if(BusStop == "Village"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, Village);
-  }
-  
-  if(BusStop == "EastRemote"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, EastRemote);
-  }
-  
-  if(BusStop == "BookStore"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, BookStore);
-  }
-  
-  if(BusStop == "CrownMerrill"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, CrownMerrill);
-  }
-  
-  if(BusStop == "NineTen"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, NineTen);
-  }
-  
-  if(BusStop == "ScienceHill"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, ScienceHill);
-  }
-  
-  if(BusStop == "Kresge"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, Kresge);
-  }
-  
-  if(BusStop == "PorterRachelCarson"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, PorterRachelCarson);
-       
-  }
-  
-  if(BusStop == "Oakes"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, Oakes);
-  }
-  
-  if(BusStop == "WesterDr"){
-  		calculateAndDisplayRoute(directionsService, directionsDisplay, pos, WesternDr);
-       
-  }
-  
-  
-  
-  
-            
-              infoWindow.open(map);
-              map.setCenter(pos);
 
-          
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          handleLocationError(false, infoWindow, map.getCenter());
+        map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -35.397, lng: 150.644 },
+                zoom: 15
+        });
+            infoWindow = new google.maps.InfoWindow;
+
+
+
+
+
+        if(busStop == "Base"){
+            var marker = new google.maps.Marker({
+                position: Base,
+                map: map,
+                title: 'Base'
+            });
         }
 
-   
+            if(busStop == "EastRemote"){
+            var marker = new google.maps.Marker({
+                position: eastRemote,
+                map: map,
+                title: 'Base'
+            });
+        }
 
-}
+        if(busStop == "Oakes"){
+            var marker = new google.maps.Marker({
+                position: Oakes,
+                map: map,
+                title: 'Oakes'
+            });
+        }
 
+        if(busStop == "Village"){
+            var marker = new google.maps.Marker({
+                position: Village,
+                map: map,
+                title: 'Village'
+            });
+        }
 
+        if(busStop == "BookStore"){
+            var marker = new google.maps.Marker({
+                position: BookStore,
+                map: map,
+                title: 'BookStore'
+            });
+        }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
-  directionsService.route({
-    origin: pointA,
-    destination: pointB,
-    travelMode: google.maps.TravelMode.WALKING
-  }, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
-}
+        if(busStop == "CrownMerrill"){
+            var marker = new google.maps.Marker({
+                position: CrownMerrill,
+                map: map,
+                title: 'CrownMerrill'
+            });
+        }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error, no geolocation  availible' :
-                              'Error: so support');
-        infoWindow.open(map);
-      }
+        if(busStop == "NineTen"){
+            var marker = new google.maps.Marker({
+                position: NineTen,
+                map: map,
+                title: 'NineTen'
+            });
+        }
 
-initMap();
+        if(busStop == "ScienceHill"){
+            var marker = new google.maps.Marker({
+                position: ScienceHill,
+                map: map,
+                title: 'ScienceHill'
+            });
+        }
+
+        if(busStop == "Kresge"){
+            var marker = new google.maps.Marker({
+                position: Kresge,
+                map: map,
+                title: 'Kresge'
+            });
+        }
+
+        if(busStop == "PorterRachelCarson"){
+            var marker = new google.maps.Marker({
+                position: PorterRachelCarson,
+                map: map,
+                title: 'PorterRachelCarson'
+            });
+        }
+
+        if(busStop == "WesternDr"){
+            var marker = new google.maps.Marker({
+                position: WesternDr,
+                map: map,
+                title: 'WesternDr'
+            });
+        }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    //alert(position.coords.latitude);
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('YOU ARE HERE');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'No Geolocation' :
+                'No Support.');
+            infoWindow.open(map);
+        }
+
 
     </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap"></script>
