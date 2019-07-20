@@ -92,7 +92,11 @@ namespace SlugBusSchedule.Controllers
                             }
                             else
                             {
-                                data.ArrivalTime = p.GetValue(e).ToString();
+                                string time = p.GetValue(e).ToString();
+                                string hours = time.Substring(0,2)
+                                int h1 = Int32.Parse(hours);
+                                if(h1>12) h1-12;
+                                data.ArrivalTime = h1.ToString() + time.Substring(2) +("PM");
                             }
                         }
                     }
