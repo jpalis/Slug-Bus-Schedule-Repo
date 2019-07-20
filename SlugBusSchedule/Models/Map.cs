@@ -270,6 +270,19 @@ public class Map
         }
             
         Console.WriteLine("\n\n\n\n\n"+nearestBusStop+"\n\n\n\n\n");
+
+        //Check the value, set Science Hill as default bus stop
+        bool noGPSData = false;
+        if (lat == 0 && lon == 0) 
+        {
+            noGPSData = true;
+        }
+
+        if(noGPSData)
+        {
+            nearestBusStop = "ScienceHill";
+        }
+        
         return nearestBusStop;
     }
 
