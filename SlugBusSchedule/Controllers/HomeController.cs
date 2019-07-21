@@ -70,7 +70,11 @@ namespace SlugBusSchedule.Controllers
             model.ClosestBusStop = nearestBusStop;
             model.BusData = new List<ArrivalData>();
 
-            string currentTime =  DateTime.Now.ToString("HH:mm:ss");
+            
+            var utcTime = DateTime.UtcNow;
+            TimeZoneInfo pacificZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            DateTime pacificTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, pacificZone);
+            var currentTime = pacificTime.ToString("HH:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
