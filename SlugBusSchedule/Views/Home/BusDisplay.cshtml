@@ -203,10 +203,15 @@
                 $("." + busNumber).text(minutes + "m " + seconds + "s ");
 
   		        // If the count down is finished, write some text
-  		        if (distance < 0) {
+  		        if (distance == 0) {
                         clearInterval(x);
                         $("." + busNumber).text("Bus is departing");
                         $("." + busNumber).parent().removeClass("text-warning").addClass("text-danger");
+                }
+                if (distance < 0) {
+                    clearInterval(x);
+                        $("." + busNumber).text("Bus arrives tomorrow");
+                        $("." + busNumber).parent().removeClass("text-warning").addClass("text-success");
                 }
 
 		    }, 1000);
@@ -353,8 +358,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                               'Error: so support');
         infoWindow.open(map);
       }
-
-//initMap();
 
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6FA57jSlzWR_rCcToLFZaQf4uqNTpIaQ&callback=initMap"></script>

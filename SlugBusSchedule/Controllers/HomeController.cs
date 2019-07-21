@@ -101,6 +101,14 @@ namespace SlugBusSchedule.Controllers
                             .Select(DynamicSelectGenerator<Schedule>(fields))
                             .FirstOrDefault();
 
+                    if(e == null)
+                    {
+                        e = db.Schedules
+                            .Where(m => m.BusNumber == item && TimeSpan.Parse(m.Base) >= TimeSpan.Parse("07:30:00"))
+                            .Select(DynamicSelectGenerator<Schedule>(fields))
+                            .FirstOrDefault();
+                    }
+
                     Type type = typeof(Schedule);
                     PropertyInfo[] pList = type.GetProperties();
                     foreach(PropertyInfo p in pList)
