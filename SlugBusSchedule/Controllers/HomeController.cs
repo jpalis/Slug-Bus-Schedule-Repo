@@ -13,6 +13,9 @@ namespace SlugBusSchedule.Controllers
 {
     public class HomeController : Controller
     {
+        public static string g_userLat { get; set; }
+        public static string g_userLon { get; set; }
+        public static string g_userBusStop { get; set; }
 
         [HttpGet]
         public IActionResult Landing()
@@ -23,20 +26,41 @@ namespace SlugBusSchedule.Controllers
         [HttpPost]
         public IActionResult Landing(Position position)
         {
+            
+
             //get string {latitude:"",longitude""} and parse into lat and lon values
-            double lat = position.latitude;
-            double lon = position.longitude;
+            //double lat = position.latitude;
+            //double lon = position.longitude;
+            double lat = 36.978161;
+            double lon = -122.034398;
+
             //using latitude and longitute, find closest bus stop, and populate new BusDisplayViewModel to show user
             string nearestBusStop = Map.findBusStop(lat, lon);
+
+            g_userLat = lat.ToString();
+            g_userLon = lon.ToString();
+            g_userBusStop = nearestBusStop;
 
             //reroute user to bus card page
             return BusDisplay(lat.ToString(), lon.ToString(), nearestBusStop);
         }
 
         [HttpGet]
-        public IActionResult Index(BusDisplayViewModel model)
+        public IActionResult Index()
         {
-            return View("Index", model);
+            return View("Index");
+        }
+
+        public IActionResult ReRouteData(string myvar)
+        {
+            if(myvar == "Index")
+            {
+                return Index();
+            }
+            else
+            {
+                return BusDisplay(g_userLat, g_userLon, g_userBusStop);
+            }
         }
 
         [HttpGet]
@@ -47,11 +71,8 @@ namespace SlugBusSchedule.Controllers
             model.UserLongitude = lon;
             model.ClosestBusStop = nearestBusStop;
             model.BusData = new List<ArrivalData>();
-            
-            
-            
 
-            string currentTime =  DateTime.Now.ToString("hh:mm:ss");
+            string currentTime =  DateTime.Now.ToString("HH:mm:ss");
 
             //get list of all available buses
             List<int> busList = new List<int>();
@@ -100,21 +121,24 @@ namespace SlugBusSchedule.Controllers
                             {
                                 if(p.Name != "LowCapacity" && p.Name != "MediumCapacity" && p.Name != "HighCapacity" && p.Name != "CurrentStatus")
                                 {
-                                    
+
+                                    data.ArrivalTime1 = p.GetValue(e).ToString();
+
                                     string timed = p.GetValue(e).ToString();
-                                    data.ArrivalTime1 = timed;
+                                    timed = timed.Remove(timed.Length - 3); //removed seconds
+
+                                    
                                     string timed1 = timed.Substring(0,2);
                                     int h1 = Int32.Parse(timed1);
-                                 
                                 
-                                if (h1 > 12) {
-                                    h1 = h1 - 12;
-                                     data.ArrivalTime = h1.ToString() + timed.Substring(2) +("PM");
-                                }
-                                else 
-                                {
-                                    data.ArrivalTime = timed + ("AM");
-                                }
+                                    if (h1 > 12) {
+                                        h1 = h1 - 12;
+                                        data.ArrivalTime = h1.ToString() + timed.Substring(2) +(" PM");
+                                    }
+                                    else 
+                                    {
+                                        data.ArrivalTime = timed + (" AM");
+                                    }
                                 }
                             }
                         }

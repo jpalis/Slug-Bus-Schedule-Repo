@@ -37,6 +37,7 @@
                                 </a>
                             </div>
                         </div>
+                        <br />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
@@ -67,35 +68,6 @@
     <div class="row">
         @foreach (var bus in Model.BusData) 
         {
-            <script>
-		// Set the date we're counting down to
-		var now = new Date("January 1, 1970 @bus.ArrivalTime1");
-		var goal = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
-
-		// Update the count down every 1 second
-		var x = setInterval(function() {
-
-  		// Get today's date and time
-  		var now = new Date();
-  		var seconds = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
-
- 		 // Find the distance between now and the count down date
- 		 var distance = goal - seconds;
-			
-  		var minutes = Math.floor(distance/60);
-		var seconds = distance %60;
-
-  		// Display the result in the element with id="demo"
-  		document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s " ;
-
-  		// If the count down is finished, write some text 
-  		if (distance < 0) {
-   		 clearInterval(x);
-    		 document.getElementById("demo").innerHTML = "EXPIRED";
-  		}
-		}, 1000);
-</script>
-
             <div class="offset-sm-2 offset-md-0 offset-lg-0 col-sm-8 col-md-4 col-lg-4">
                 <div class="card-container">
                     <div class="card">
@@ -104,23 +76,39 @@
                                 <img src="~/lib/images/dewang-gupta-ESEnXckWlLY-unsplash.jpg" />
                             </div>
                             <div class="user">
-                                <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/fontelico_2013-08-07_crown_356_256_ffffff_none.png" />
+                                @if (bus.BusNumber == "10")
+                                {
+                                    <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/10-icon.png" />
+                                }
+                                else if (bus.BusNumber == "15")
+                                {
+                                    <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/15-icon.png" />
+                                }
+                                else if (bus.BusNumber == "16")
+                                {
+                                    <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/16-icon.png" />
+                                }
+                                else if (bus.BusNumber == "19")
+                                {
+                                    <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/19-icon.png" />
+                                }
+                                else
+                                {
+                                    <img class="img-circle bg-info" style="border: none !important" src="~/lib/images/20-icon.png" />
+                                }
                             </div>
                             <div class="content">
                                 <div class="main">
-                                    <h2 class="text-center text-primary">
-                                        <i class="fas fa-bus"></i>
-                                        @bus.BusNumber
-                                    </h2>
-                                    <h3 class="profession">@bus.Street</h3>
-                                    
-                                    <h2 class="text-center text-info">
+                                    <h3 class="profession">Arrival @bus.Street</h3>
+                                    <h3 class="text-center text-info">
                                         <i class="fas fa-clock"></i>
-                                        @bus.ArrivalTime         
-                                        <p id="demo"></p>
-
-
-                                    </h2>
+                                        @bus.ArrivalTime
+                                    </h3>
+                                    <h3 class="text-center text-warning">
+                                        <i class="fas fa-stopwatch"></i>
+                                        <span class="@bus.BusNumber"></span>
+                                    </h3>
+                                    
                                 </div>
                                 <div class="footer">
                                     <div class="rating text-center">
@@ -140,7 +128,7 @@
                                     <div class="text-center">
                                         <button class="btn btn-info text-center" type="button" disabled>
                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                            Report Bus Crowd Size
+                                            Current Bus Crowd Status
                                         </button>
                                     </div>
                                     <div class="stats-container">
@@ -184,12 +172,50 @@
     </div>
 
 </div>
-<script>
-    $(document).ready(function () {
-            
-        });
-</script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var data = @Html.Raw(Json.Serialize(@Model.BusData));
+
+        $.each(data, function (index, item) {
+
+            var time = item.arrivalTime1;
+            var busNumber = item.busNumber;
+            console.log(busNumber);
+
+            // Set the date we're counting down to
+		    var now = new Date("January 1, 1970 " + time);
+		    var goal = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+
+		    // Update the count down every 1 second
+		    var x = setInterval(function() {
+
+  		        // Get today's date and time
+  		        var now = new Date();
+  		        var seconds = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+
+ 		        // Find the distance between now and the count down date
+ 		        var distance = goal - seconds;
+  		        var minutes = Math.floor(distance/60);
+		        var seconds = distance %60;
+
+                // Display the result in the element with id="demo"
+                $("." + busNumber).text(minutes + "m " + seconds + "s ");
+
+  		        // If the count down is finished, write some text 
+  		        if (distance < 0) {
+                        clearInterval(x);
+                        $("." + busNumber).text("Bus is departing");
+                        $("." + busNumber).parent().removeClass("text-warning").addClass("text-danger");
+                }
+
+		    }, 1000);
+
+
+        });
+    });
+</script>
 
 <script>
 
@@ -312,8 +338,8 @@
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = {
 
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
+                        lat: 36.978161,
+                        lng: -122.034398
                     };
                     //alert(position.coords.latitude);
 
