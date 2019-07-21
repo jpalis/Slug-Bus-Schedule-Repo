@@ -29,10 +29,8 @@ namespace SlugBusSchedule.Controllers
             
 
             //get string {latitude:"",longitude""} and parse into lat and lon values
-            //double lat = position.latitude;
-            //double lon = position.longitude;
-            double lat = 36.978161;
-            double lon = -122.034398;
+            double lat = position.latitude;
+            double lon = position.longitude;
 
             //using latitude and longitute, find closest bus stop, and populate new BusDisplayViewModel to show user
             string nearestBusStop = Map.findBusStop(lat, lon);
