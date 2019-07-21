@@ -33,11 +33,10 @@
         </nav>
         <div>
             @RenderBody()
+
+            @RenderSection("ShowBody", required: false)
         </div>
     </div>
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("ShowBody", required: false)
-    @RenderSection("Scripts", required: false)
+    
 </body>
 </html>
