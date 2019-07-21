@@ -182,7 +182,8 @@
 
             var time = item.arrivalTime1;
             var busNumber = item.busNumber;
-            console.log(busNumber);
+            console.log("Bus: " + busNumber);
+            console.log("Arrival time: " + time);
 
             // Set the date we're counting down to
 		    var now = new Date("January 1, 1970 " + time);
@@ -196,7 +197,10 @@
   		        var seconds = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
 
  		        // Find the distance between now and the count down date
- 		        var distance = goal - seconds;
+                var distance = goal - seconds;
+                console.log("Seconds: " + seconds);
+                console.log("Goal: " + goal);
+                console.log("Distance: " + distance);
   		        var minutes = Math.floor(distance/60);
 		        var seconds = distance %60;
 
