@@ -92,7 +92,7 @@ namespace SlugBusSchedule.Controllers
                     ArrivalData data = new ArrivalData();
                     
                     //Dynamically Choose Fields
-                    string fields = "BusNumber,Street,ID," + model.ClosestBusStop;
+                    string fields = "CurrentStatus,BusNumber,Street,ID," + model.ClosestBusStop;
 
                     //select 
                         
@@ -126,6 +126,10 @@ namespace SlugBusSchedule.Controllers
                             else if(p.Name == "ID")
                             {
                                 data.ID = e.ID;
+                            }
+                            else if(p.Name == "CurrentStatus")
+                            {
+                                data.CurrentStatus = e.CurrentStatus;
                             }
                             else
                             {
@@ -212,16 +216,16 @@ namespace SlugBusSchedule.Controllers
             return lambda.Compile();
         }
 
-        public string UpdateBusCapacity(BusCapacityModel model)
+        public string UpdateBusCapacity(string userStatusInput, int ID)
         {
             string currenStatus;
 
             int busCapacityUpdateAmount;
-            if(model.UserStatusInput == "low")
+            if(userStatusInput == "low")
             {
                 busCapacityUpdateAmount = 1;
             }
-            else if(model.UserStatusInput == "medium")
+            else if(userStatusInput == "medium")
             {
                 busCapacityUpdateAmount = 3;
             }
@@ -232,15 +236,15 @@ namespace SlugBusSchedule.Controllers
 
             using (var db = new SlugContext())
             {
-                Schedule result = (Schedule)db.Schedules.Where(j => j.ID == model.ID).FirstOrDefault();
+                Schedule result = (Schedule)db.Schedules.Where(j => j.ID == ID).FirstOrDefault();
                 if(result != null)
                 {
 
-                    if (model.UserStatusInput == "low")
+                    if (userStatusInput == "low")
                     {
                         result.LowCapacity +=  busCapacityUpdateAmount;
                     }
-                    else if (model.UserStatusInput == "medium")
+                    else if (userStatusInput == "medium")
                     {
                         result.MediumCapacity += busCapacityUpdateAmount;
                     }

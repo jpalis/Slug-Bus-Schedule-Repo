@@ -20,5 +20,6 @@ namespace SlugBusSchedule.Models
         public string ArrivalTime { get; set; }
         public string ArrivalTime1 { get; set; }
         public string Street { get; set; }
+        public string CurrentStatus { get; set; }
     }
 }
